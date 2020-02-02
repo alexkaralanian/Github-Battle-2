@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import withHover from './withHover';
+import Hover from './Hover';
 
 const styles = {
   container: {
@@ -24,23 +24,24 @@ const styles = {
   }
 };
 
-function Tooltip({ text, children, hovering }) {
-  // with our HOC, we can pass hovering to any component
+function Tooltip({ text, children }) {
   return (
-    <div style={styles.container}>
-      {hovering && <div style={styles.tooltip}>{text}</div>}
-      {children}
-    </div>
+    <Hover>
+      {/* We create a hover component
+      We pass it a function
+      Invoke it inside of Hover component and pass it the hovering state */}
+      {hovering => (
+        <div style={styles.container}>
+          {hovering && <div style={styles.tooltip}>{text}</div>}
+          {children}
+        </div>
+      )}
+    </Hover>
   );
 }
 
 Tooltip.propTypes = {
-  text: PropTypes.string.isRequired,
-  hovering: PropTypes.bool.isRequired
+  text: PropTypes.string.isRequired
 };
 
-// HOC is a component
-// Takes in another component as an arg
-// Returns a new component
-// Returned component renders original component passed into it.
-export default withHover(Tooltip, 'hovering');
+export default Tooltip;
