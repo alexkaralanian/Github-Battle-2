@@ -4,7 +4,8 @@ module.exports = {
   entry: './app/index.js',
   output: {
     path: require('path').resolve(__dirname, 'dist'),
-    filename: 'bundle.js'
+    filename: 'bundle.js',
+    publicPath: '/'
   },
   module: {
     rules: [
@@ -23,5 +24,8 @@ module.exports = {
       template: 'app/index.html'
     })
   ],
+  devServer: {
+    historyApiFallback: true
+  },
   mode: process.env.NODE_ENV === 'production' ? 'production' : 'development'
 };
