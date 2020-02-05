@@ -1,4 +1,6 @@
 import React from 'react';
+// NOT IN USE.
+// THIS IS OUR RENDER PROP METHOD.
 
 export default class Hover extends React.Component {
   state = {

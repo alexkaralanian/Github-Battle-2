@@ -1,5 +1,6 @@
 import React from 'react';
-import { FaDice } from 'react-icons/fa';
+// NOT IN USE
+// THIS IS OUR HOC COMPONENT FOR HOVER
 
 // function that takes in a component and returns another component
 export default function withHover(Component, propName = 'hovering') {
