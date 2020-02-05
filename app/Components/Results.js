@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Tooltip from './Tooltip';
-
-import { battle } from '../utils/api';
+import queryString from 'query-string';
+import { Link } from 'react-router-dom';
 import {
   FaCompass,
   FaBriefcase,
@@ -12,8 +11,10 @@ import {
   FaUser
 } from 'react-icons/fa';
 
+import Tooltip from './Tooltip';
 import Card from './Card';
 import Loading from './Loading';
+import { battle } from '../utils/api';
 
 const styles = {
   container: {
@@ -84,12 +85,6 @@ class ProfileList extends React.Component {
   }
 }
 
-// function ProfileList({ profile }) {
-//   return (
-
-//   );
-// }
-
 export default class Results extends React.Component {
   constructor(props) {
     super(props);
@@ -102,7 +97,9 @@ export default class Results extends React.Component {
     };
   }
   componentDidMount() {
-    const { playerOne, playerTwo } = this.props;
+    const { playerOne, playerTwo } = queryString.parse(
+      this.props.location.search
+    );
 
     battle([playerOne, playerTwo])
       .then(players => {
@@ -152,16 +149,10 @@ export default class Results extends React.Component {
             <ProfileList profile={loser.profile} />
           </Card>
         </div>
-        <button onClick={this.props.onReset} className="btn dark-btn btn-space">
+        <Link to={'/battle'} className="btn dark-btn btn-space">
           Reset
-        </button>
+        </Link>
       </React.Fragment>
     );
   }
 }
-
-Results.propTypes = {
-  playerOne: PropTypes.string.isRequired,
-  playerTwo: PropTypes.string.isRequired,
-  onReset: PropTypes.func.isRequired
-};
