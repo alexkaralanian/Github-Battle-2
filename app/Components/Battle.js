@@ -102,10 +102,10 @@ function PlayerPreview({ username, onReset, label }) {
             {username}
           </a>
         </div>
+        <button className="btn-clear flex-center" onClick={onReset}>
+          <FaTimesCircle color="rgb(194, 57, 42)" size={26} />
+        </button>
       </div>
-      <button className="btn-clear flex-center" onClick={onReset}>
-        <FaTimesCircle color="rgb(194, 57, 42)" size={26} />
-      </button>
     </div>
   );
 }
@@ -132,7 +132,7 @@ export default function Battle() {
       <div className="players-container">
         <h1 className="center-text header-lg">Players</h1>
         <div className="row space-around">
-          {playerOne === null ? (
+          {!playerOne ? (
             <PlayerInput
               label="Player One"
               onSubmit={player => handleSubmit('playerOne', player)}
@@ -144,7 +144,7 @@ export default function Battle() {
               onReset={() => handleReset('playerOne')}
             />
           )}
-          {playerTwo === null ? (
+          {!playerTwo ? (
             <PlayerInput
               label="Player Two"
               onSubmit={player => handleSubmit('playerTwo', player)}
