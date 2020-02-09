@@ -88,15 +88,19 @@ class ProfileList extends React.Component {
 function battleReducer(state, action) {
   if (action.type === 'success') {
     return {
-      ...state
+      winner: action.winner,
+      loser: action.loser,
+      error: null,
+      loading: false
     };
   } else if (action.type === 'error') {
     return {
       ...state,
-      error: action.error.message
+      error: action.message,
+      loading: false
     };
   } else {
-    throw new Error("This action type isn't supported");
+    throw new Error(`That action type isn't supported`);
   }
 }
 
